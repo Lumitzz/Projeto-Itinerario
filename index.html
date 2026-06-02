@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inclusão Digital — ODS 10</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Transições suaves para acessibilidade */
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease, font-size 0.2s ease;
+        }
+        
+        /* Efeito de vidro (Glassmorphism) */
+        .glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Classes para o modo de Alto Contraste */
+        body.contrast-mode {
+            background-color: #121212 !important;
+            color: #ffffff !important;
+        }
+        body.contrast-mode .bg-white,
+        body.contrast-mode .bg-slate-50,
+        body.contrast-mode .bg-slate-100,
+        body.contrast-mode .glass {
+            background-color: #1e1e1e !important;
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+        body.contrast-mode text, 
+        body.contrast-mode p, 
+        body.contrast-mode h1, 
+        body.contrast-mode h2, 
+        body.contrast-mode h3, 
+        body.contrast-mode span {
+            color: #ffffff !important;
+        }
+        body.contrast-mode button, 
+        body.contrast-mode a {
+            background-color: #ffff00 !important;
+            color: #000000 !important;
+            border: 2px solid #ffffff !important;
+        }
+        body.contrast-mode .border,
+        body.contrast-mode .border-slate-200 {
+            border-color: #ffffff !important;
+        }
+    </style>
+</head>
+<body id="app-body" class="bg-slate-50 text-slate-800 antialiased font-sans text-base">
+
+    <!-- ACESSIBILIDADE BAR (A+, A-, Alto Contraste) -->
+    <div class="sticky top-0 z-50 bg-slate-900 text-white py-2 px-4 shadow-md flex justify-between items-center text-xs md:text-sm">
+        <div class="flex items-center gap-2">
+            <span class="font-semibold text-amber-400">Acessibilidade:</span>
+            <span class="hidden md:inline">Ajuste o site para sua melhor leitura</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <button onclick="changeFontSize('decrease')" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 rounded font-bold" title="Diminuir Fonte">A-</button>
+            <button onclick="changeFontSize('reset')" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 rounded font-bold" title="Tamanho Padrão">A</button>
+            <button onclick="changeFontSize('increase')" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 rounded font-bold" title="Aumentar Fonte">A+</button>
+            <span class="text-slate-600">|</span>
+            <button onclick="toggleContrast()" class="flex items-center gap-1.5 px-3 py-1 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded font-semibold transition-all">
+                <i data-lucide="contrast" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">Alto Contraste</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <header class="relative overflow-hidden bg-gradient-to-br from-indigo-950 via-slate-900 to-blue-950 text-white py-20 md:py-32">
+        <!-- Background Decorativo -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+            <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 mb-6">
+                <i data-lucide="globe" class="w-3.5 h-3.5"></i> Objetivo de Desenvolvimento Sustentável 10 (ODS 10)
+            </span>
+            <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-indigo-200 max-w-4xl mx-auto leading-tight">
+                Conectar é Incluir:<br class="hidden md:block"> Tecnologia contra a Desigualdade
+            </h1>
+            <p class="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
+                No mundo de hoje, o acesso à internet e a dispositivos digitais não é luxo — é o alicerce para garantir direitos básicos, educação e trabalho digno.
+            </p>
+            <div class="mt-10 flex flex-wrap justify-center gap-4">
+                <a href="#solucao" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-medium px-8 py-4 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5">
+                    Conhecer os Pilares
+                    <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                </a>
+                <a href="#quiz" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-medium px-8 py-4 rounded-xl transition-all">
+                    Fazer o Teste de Acesso
+                    <i data-lucide="check-square" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- O PROBLEMA (ODS 10) -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-6">
+                O Abismo Digital e a Desigualdade Social
+            </h2>
+            <div class="w-16 h-1 bg-indigo-600 mx-auto mb-8 rounded-full"></div>
+            <p class="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
+                A <strong>ODS 10 (Redução das Desigualdades)</strong> visa dar voz, espaço e poder a todos. No entanto, quando uma comunidade não possui acesso à internet rápida ou não sabe como utilizar um computador, ela é excluída de serviços financeiros, de vagas de emprego e do ensino. A inclusão digital é a ponte para erradicar a desigualdade estrutural.
+            </p>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE PILARES -->
+    <section id="solucao" class="py-24 bg-gradient-to-b from-slate-50 to-slate-100 border-t border-slate-200/60">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                    Nossos Três Pilares de Atuação
+                </h2>
+                <p class="mt-4 text-slate-500">
+                    Estratégias unificadas para transformar conectividade em emancipação.
+                </p>
+            </div>
+
+            <!-- GRID DOS CARDS -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- CARD 1 -->
+                <div class="glass border border-slate-200/80 rounded-2xl p-8 shadow-sm hover:shadow-xl hover:border-indigo-300 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                        <i data-lucide="wifi" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-950 transition-colors">
+                        1. Infraestrutura Segura
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Instalação de pontos de internet de alta velocidade e distribuição de dispositivos em bairros periféricos e comunidades rurais isoladas.
+                    </p>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="glass border border-slate-200/80 rounded-2xl p-8 shadow-sm hover:shadow-xl hover:border-indigo-300 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                        <i data-lucide="book-open" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-950 transition-colors">
+                        2. Alfabetização Digital
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Treinamentos práticos que ensinam desde o uso básico de smartphones até programação, criação de currículos online e segurança cibernética básica.
+                    </p>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="glass border border-slate-200/80 rounded-2xl p-8 shadow-sm hover:shadow-xl hover:border-indigo-300 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                        <i data-lucide="briefcase" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-950 transition-colors">
+                        3. Empregabilidade
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Conexão direta entre jovens capacitados por projetos sociais e vagas afirmativas de trabalho remoto ou presencial no setor de tecnologia.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO INTERATIVA: QUIZ DE INCLUSÃO -->
+    <section id="quiz" class="py-20 bg-white border-t border-slate-100">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="bg-gradient-to-tr from-slate-900 to-indigo-950 rounded-3xl p-8 md:p-12 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-2xl"></div>
+                
+                <div class="relative z-10">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4 flex items-center gap-2">
+                        <i data-lucide="compass" class="text-amber-400"></i>
+                        Teste: Qual o seu nível de inclusão digital?
+                    </h3>
+                    <p class="text-slate-300 text-sm md:text-base mb-8">
+                        Responda 3 perguntas rápidas para entender seu nível de conectividade em relação à média brasileira.
+                    </p>
+
+                    <!-- Quiz Card Wrapper -->
+                    <div id="quiz-container" class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                        <!-- Pergunta 1 -->
+                        <div id="q1" class="quiz-step">
+                            <span class="text-xs text-amber-400 uppercase font-bold tracking-widest">Pergunta 1 de 3</span>
+                            <h4 class="text-lg font-semibold mt-1 mb-4">Qual é o seu principal meio de acesso à internet?</h4>
+                            <div class="space-y-3">
+                                <button onclick="answerQuestion(1, 3)" class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 transition-all text-sm">
+                                    Computador próprio e Wi-Fi de alta velocidade em casa
+                                </button>
+                                <button onclick="answerQuestion(1, 2)" class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 transition-all text-sm">
+                                    Apenas celular usando Wi-Fi compartilhado ou dados móveis oscilantes
+                                </button>
+                                <button onclick="answerQuestion(1, 1)" class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 transition-all text-sm">
+                                    Lan house ou rede pública raramente disponível
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 2 (Oculta por padrão) -->
+                        <div id="q2" class="quiz-step hidden">
+                            <span class="text-xs text-amber-400 uppercase font-bold tracking-widest">Pergunta 2 de 3</span>
+                            <h4 class="text-lg font-semibold mt-1 mb-4">Se você precisar enviar um currículo ou fazer uma inscrição online hoje, como se sente?</h4>
+                            <div class="space-y-3">
+                                <button onclick="answerQuestion(2, 3)" class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 transition-all text-sm">
+                                    Totalmente confiante, faço tudo sozinho rapidamente
+                                </button>
+                                <button onclick="answerQuestion(2, 2)" class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 transition-all text-sm">
+                                    Consigo fazer, mas tenho bastante dificuldade técnica ou com o layout
+                                </button>
+                                <button onclick="answerQuestion(2, 1)" class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 transition-all text-sm">
+                                    Não sei como fazer e precisaria da ajuda completa de outra pessoa
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 3 (Oculta por padrão) -->
+                        <div id="q3" class="quiz-step hidden">
+                            <span class="text-xs text-amber-400 uppercase font-bold tracking-widest">Pergunta 3 de 3</span>
+                            <h4 class="text-lg font-semibold mt-1 mb-4">Quantas pessoas em sua casa utilizam o mesmo dispositivo para estudar ou trabalhar?</h4>
+                            <div class="space-y-3">
+                                <button onclick="answerQuestion(3, 3)" class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 transition-all text-sm">
+                                    Cada morador tem o seu próprio aparelho (celular/PC)
+                                </button>
+                                <button onclick="answerQuestion(3, 2)" class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 transition-all text-sm">
+                                    Dividimos um único aparelho entre 2 ou 3 pessoas
+                                </button>
+                                <button onclick="answerQuestion(3, 1)" class="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 transition-all text-sm">
+                                    Não temos aparelhos funcionais ou dividimos entre mais de 4 pessoas
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Resultados (Oculto por padrão) -->
+                        <div id="quiz-result" class="quiz-step hidden text-center py-6">
+                            <div class="w-16 h-16 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="award" class="w-8 h-8"></i>
+                            </div>
+                            <h4 id="result-title" class="text-xl font-bold mb-2">Seu Resultado</h4>
+                            <p id="result-desc" class="text-slate-300 text-sm mb-6 max-w-lg mx-auto">
+                                Calculando...
+                            </p>
+                            <button onclick="resetQuiz()" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-6 py-2.5 rounded-xl border border-white/10 text-sm font-semibold transition-all">
+                                <i data-lucide="refresh-cw" class="w-4 h-4"></i> Refazer Teste
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHATBOT ODS 10 INTEGRADO (GEMINI API) -->
+    <section class="py-20 bg-slate-50 border-t border-slate-200/50">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Tire suas Dúvidas sobre a ODS 10</h2>
+                <p class="text-slate-500 mt-2 text-sm">
+                    Converse em tempo real com o nosso Assistente Inteligente e entenda tudo sobre inclusão digital e direitos.
+                </p>
+            </div>
+
+            <div class="bg-white border border-slate-200/80 shadow-lg rounded-2xl overflow-hidden flex flex-col h-[500px]">
+                <!-- Chat Header -->
+                <div class="bg-indigo-900 text-white p-4 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-indigo-700/80 flex items-center justify-center border border-indigo-400/30">
+                            <i data-lucide="bot" class="w-5 h-5 text-amber-400"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-sm leading-none">Guia de Inclusão Digital</p>
+                            <span class="text-xs text-indigo-300 flex items-center gap-1 mt-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Ativo agora
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat History -->
+                <div id="chat-box" class="flex-1 p-6 overflow-y-auto space-y-4 bg-slate-50/50">
+                    <!-- Mensagem do Bot -->
+                    <div class="flex items-start gap-3 max-w-[85%]">
+                        <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="bot" class="w-4 h-4 text-slate-600"></i>
+                        </div>
+                        <div class="bg-white border border-slate-200 p-3.5 rounded-2xl rounded-tl-none shadow-sm text-sm text-slate-700">
+                            Olá! Sou o assistente da ODS 10. Você pode me perguntar coisas como:
+                            <div class="mt-3 space-y-1">
+                                <button onclick="quickAsk('O que é a ODS 10?')" class="block text-left text-xs text-indigo-600 hover:underline font-semibold">&bull; O que é a ODS 10?</button>
+                                <button onclick="quickAsk('Qual a importância da Inclusão Digital para reduzir as desigualdades?')" class="block text-left text-xs text-indigo-600 hover:underline font-semibold">&bull; Qual a relação entre desigualdade e tecnologia?</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="p-4 border-t border-slate-100 bg-white flex gap-2">
+                    <input id="chat-input" type="text" placeholder="Escreva sua pergunta aqui..." class="flex-1 px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                    <button id="send-btn" onclick="sendMessage()" class="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-xl transition-all shadow-md">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2 text-white font-medium">
+                <div class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></div>
+                ODS 10 — Reduzir a Desigualdade através da Conexão
+            </div>
+            <p class="text-sm">
+                Desenvolvido com foco absoluto em Acessibilidade e Inclusão Digital &bull; 2026
+            </p>
+        </div>
+    </footer>
+
+    <!-- LOGICA SCRIPT -->
+    <script>
+        // Inicializar os ícones Lucide
+        lucide.createIcons();
+
+        // 1. Controle de Acessibilidade (Tamanho da Fonte e Contraste)
+        let currentSizePercent = 100;
+        const bodyEl = document.getElementById('app-body');
+
+        function changeFontSize(action) {
+            if (action === 'increase' && currentSizePercent < 130) {
+                currentSizePercent += 10;
+            } else if (action === 'decrease' && currentSizePercent > 80) {
+                currentSizePercent -= 10;
+            } else if (action === 'reset') {
+                currentSizePercent = 100;
+            }
+            bodyEl.style.fontSize = `${currentSizePercent}%`;
+        }
+
+        function toggleContrast() {
+            bodyEl.classList.toggle('contrast-mode');
+        }
+
+        // 2. Lógica do Quiz Interativo
+        let quizScore = 0;
+        const answers = { 1: 0, 2: 0, 3: 0 };
+
+        function answerQuestion(step, scoreValue) {
+            answers[step] = scoreValue;
+            
+            // Avançar etapas do Quiz
+            document.getElementById(`q${step}`).classList.add('hidden');
+            
+            if (step < 3) {
+                document.getElementById(`q${step + 1}`).classList.remove('hidden');
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            const totalScore = answers[1] + answers[2] + answers[3];
+            const resultTitle = document.getElementById('result-title');
+            const resultDesc = document.getElementById('result-desc');
+            const resultContainer = document.getElementById('quiz-result');
+            
+            resultContainer.classList.remove('hidden');
+
+            if (totalScore >= 8) {
+                resultTitle.innerText = "Nível de Acesso: Pleno 🌐";
+                resultDesc.innerText = "Você tem excelente infraestrutura e capacidade para navegar no ecossistema atual. Seu papel principal é usar seu privilégio digital para dar voz e apoiar projetos de inclusão para quem ainda não tem esse mesmo acesso.";
+            } else if (totalScore >= 5) {
+                resultTitle.innerText = "Nível de Acesso: Parcial / Vulnerável ⚠️";
+                resultDesc.innerText = "Você tem acesso básico, mas ainda encontra barreiras como conexões lentas ou falta de computadores dedicados. Programas públicos de alfabetização tecnológica ajudariam você a evoluir profissionalmente.";
+            } else {
+                resultTitle.innerText = "Nível de Acesso: Exclusão Digital Crítica 🚫";
+                resultDesc.innerText = "Sua realidade ilustra o gargalo que a ODS 10 tenta combater. A falta de aparelhos dedicados e treinamento prático o afasta das maiores oportunidades do país. Projetos comunitários de distribuição de rede e computadores são urgentes para sua região.";
+            }
+        }
+
+        function resetQuiz() {
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('q1').classList.remove('hidden');
+            document.getElementById('q2').classList.add('hidden');
+            document.getElementById('q3').classList.add('hidden');
+            answers[1] = 0;
+            answers[2] = 0;
+            answers[3] = 0;
+        }
+
+        // 3. Lógica do Chatbot Integrado (Gemini 2.5 API)
+        const apiKey = "AQ.Ab8RN6Kr-OB_MAWN-COErUwrocUUGLCII64urU4FL7MFIeO38w"; 
+
+        async function fetchGeminiResponse(userText) {
+            // Usando o modelo estável gemini-2.5-flash
+            const model = "gemini-2.5-flash";
+            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+            const systemPrompt = "Você é um assistente virtual especialista na ODS 10 (Redução das Desigualdades) e em Inclusão Digital. Responda de forma acessível, empática, direta, usando português claro e acolhedor. Incentive o usuário a apoiar a causa.";
+
+            let delay = 1000;
+            for (let attempt = 0; attempt < 5; attempt++) {
+                try {
+                    const response = await fetch(endpoint, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            contents: [{ role: "user", parts: [{ text: userText }] }],
+                            system_instruction: { parts: [{ text: systemPrompt }] }
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({}));
+                        console.error("Erro na API Gemini:", response.status, errorData);
+                        
+                        // Erros 4xx geralmente são permanentes (chave inválida, modelo errado, etc)
+                        if (response.status >= 400 && response.status < 500) {
+                            return `Erro de configuração (${response.status}): ${errorData.error?.message || "Verifique sua API Key e permissões."}`;
+                        }
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "Desculpe, não consegui processar sua dúvida. Pode tentar de outra forma?";
+                } catch (err) {
+                    console.error(`Tentativa ${attempt + 1} falhou:`, err);
+                    if (attempt === 4) {
+                        return "Erro ao conectar com o serviço de inteligência. Por favor, verifique sua conexão e tente novamente.";
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        async function sendMessage() {
+            const inputField = document.getElementById('chat-input');
+            const messageText = inputField.value.trim();
+            if (!messageText) return;
+
+            inputField.value = "";
+            appendUserMessage(messageText);
+
+            // Adiciona indicador de digitando
+            const typingId = appendBotTyping();
+
+            try {
+                const answer = await fetchGeminiResponse(messageText);
+                removeBotTyping(typingId);
+                appendBotMessage(answer);
+            } catch (error) {
+                removeBotTyping(typingId);
+                appendBotMessage("Houve um pequeno problema na comunicação. Tente novamente.");
+            }
+        }
+
+        function quickAsk(prompt) {
+            appendUserMessage(prompt);
+            const typingId = appendBotTyping();
+            
+            fetchGeminiResponse(prompt).then(answer => {
+                removeBotTyping(typingId);
+                appendBotMessage(answer);
+            }).catch(() => {
+                removeBotTyping(typingId);
+                appendBotMessage("Houve um erro. Tente novamente mais tarde.");
+            });
+        }
+
+        function appendUserMessage(text) {
+            const chatBox = document.getElementById('chat-box');
+            const userMsgHtml = `
+                <div class="flex items-start gap-3 justify-end max-w-[85%] ml-auto">
+                    <div class="bg-indigo-600 text-white p-3.5 rounded-2xl rounded-tr-none shadow-sm text-sm">
+                        ${text}
+                    </div>
+                </div>
+            `;
+            chatBox.insertAdjacentHTML('beforeend', userMsgHtml);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function appendBotMessage(text) {
+            const chatBox = document.getElementById('chat-box');
+            const botMsgHtml = `
+                <div class="flex items-start gap-3 max-w-[85%]">
+                    <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="bot" class="w-4 h-4 text-slate-600"></i>
+                    </div>
+                    <div class="bg-white border border-slate-200 p-3.5 rounded-2xl rounded-tl-none shadow-sm text-sm text-slate-700">
+                        ${text.replace(/\n/g, '<br>')}
+                    </div>
+                </div>
+            `;
+            chatBox.insertAdjacentHTML('beforeend', botMsgHtml);
+            lucide.createIcons();
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function appendBotTyping() {
+            const chatBox = document.getElementById('chat-box');
+            const id = "typing-" + Date.now();
+            const typingHtml = `
+                <div id="${id}" class="flex items-start gap-3 max-w-[85%]">
+                    <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="bot" class="w-4 h-4 text-slate-600"></i>
+                    </div>
+                    <div class="bg-white border border-slate-200 p-4 rounded-2xl rounded-tl-none shadow-sm text-sm text-slate-400 italic flex items-center gap-1.5">
+                        <span class="inline-block w-2 h-2 rounded-full bg-slate-400 animate-bounce"></span>
+                        <span class="inline-block w-2 h-2 rounded-full bg-slate-400 animate-bounce" style="animation-delay: 0.2s"></span>
+                        <span class="inline-block w-2 h-2 rounded-full bg-slate-400 animate-bounce" style="animation-delay: 0.4s"></span>
+                    </div>
+                </div>
+            `;
+            chatBox.insertAdjacentHTML('beforeend', typingHtml);
+            lucide.createIcons();
+            chatBox.scrollTop = chatBox.scrollHeight;
+            return id;
+        }
+
+        function removeBotTyping(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        // Enviar com a tecla Enter
+        document.getElementById('chat-input').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
