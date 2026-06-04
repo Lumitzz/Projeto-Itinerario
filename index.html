@@ -336,6 +336,7 @@
     </footer>
 
     <!-- LOGICA SCRIPT -->
+    <script src="config.js"></script>
     <script>
         // Inicializar os ícones Lucide
         lucide.createIcons();
@@ -406,17 +407,9 @@
             answers[3] = 0;
         }
 
-        // 3. Lógica do Chatbot Integrado (Gemini 2.5 API)
-        // Ofuscando a chave para o robô do GitHub não detectar
-        const _p1 = "AQ.Ab8RN6I9aphJFrZB_";
-        const _p2 = "22diDSEKcsjmi-97hMHh0HufuieI-bqAQ";
-        const apiKey = _p1 + _p2; 
-
+        // 3. Lógica do Chatbot Integrado (Vercel Serverless Function)
         async function fetchGeminiResponse(userText) {
-            // Usando o modelo estável gemini-2.5-flash
-            const model = "gemini-2.5-flash";
-            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-            const systemPrompt = "Você é um assistente virtual especialista na ODS 10 (Redução das Desigualdades) e em Inclusão Digital. Responda de forma acessível, empática, direta, usando português claro e acolhedor. Incentive o usuário a apoiar a causa.";
+            const endpoint = "/api/chat";
 
             let delay = 1000;
             for (let attempt = 0; attempt < 5; attempt++) {
@@ -424,24 +417,20 @@
                     const response = await fetch(endpoint, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            contents: [{ role: "user", parts: [{ text: userText }] }],
-                            system_instruction: { parts: [{ text: systemPrompt }] }
-                        })
+                        body: JSON.stringify({ message: userText })
                     });
                     
+                    const data = await response.json();
+
                     if (!response.ok) {
-                        const errorData = await response.json().catch(() => ({}));
-                        console.error("Erro na API Gemini:", response.status, errorData);
-                        
+                        console.error("Erro na API Local:", response.status, data);
                         if (response.status >= 400 && response.status < 500) {
                             return `O assistente está temporariamente indisponível (Erro ${response.status}).`;
                         }
                         throw new Error(`HTTP ${response.status}`);
                     }
                     
-                    const data = await response.json();
-                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "Desculpe, não consegui processar sua dúvida. Pode tentar de outra forma?";
+                    return data.text || "Desculpe, não consegui processar sua dúvida. Pode tentar de outra forma?";
                 } catch (err) {
                     console.error(`Tentativa ${attempt + 1} falhou:`, err);
                     if (attempt === 4) {
